@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MyApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>We Chat</title>
+    <link href="./lib/ionic/css/ionic.min.css" type="text/css" rel="stylesheet"/>
+    <link href="main.css" type="text/css" rel="stylesheet"/>
+    <script src="./lib/ionic/js/ionic.bundle.min.js"></script>
+    <script src="lib/ionic/js/angular/angular-md5.min.js"></script>
+    <!--<script src="cordova.js"></script>-->?
+</head>
+<body ng-controller="mainCtrl">
+<ion-side-menus>
+    <ion-side-menu-content>
+        <ion-header-bar class="bar-dark">
+            <div class="buttons">
+                <button class="button button-clear icon ion-android-menu" ng-click="toggleLeft()">
+                    微信
+                </button>
+            </div>
+            <h1 class="title"></h1>
+            <!--<div class="buttons" side="right">-->
+            <!--<button class="button button-clear icon ion-search "></button>-->
+            <!--</div>-->
+
+            <div class="buttons" ng-click="showListMenu()">
+                <button class="button button-clear icon ion-android-add"></button>
+            </div>
+            <div class="list-menu " ng-show="judge.listMenuShow">
+                <ion-list class="positive-bg">
+                    <ion-item class="icon-left dark-bg" style="border-bottom-color: rgba(0,0,0,.3);border-top: none">
+                        <i class="icon ion-ios-chatbubble light">&nbsp;&nbsp;&nbsp;发起群聊</i>
+                    </ion-item>
+                    <ion-item class="icon-left dark-bg light" style="border-top-color: rgba(0,0,0,.3)"
+                              ng-click="openModal()">
+                        <i class="icon ion-ios-personadd">&nbsp;&nbsp;&nbsp;添加朋友
+                        </i>
+                    </ion-item>
+                    <ion-item class="icon-left dark-bg light" style="border-top-color: rgba(0,0,0,.6)">
+                        <i class="icon ion-android-expand ">&nbsp;&nbsp;&nbsp;扫一扫
+                        </i>
+                    </ion-item>
+                    <ion-item class="icon-left dark-bg light" style="border-top-color: rgba(0,0,0,.3)">
+                        <i class="icon ion-ios-briefcase">&nbsp;&nbsp;&nbsp;收钱
+                        </i>
+                    </ion-item>
+                    <ion-item class="icon-left dark-bg light" style="border-top-color: rgba(0,0,0,.3)">
+                        <i class="icon ion-android-mail">&nbsp;&nbsp;&nbsp;帮助与反馈
+                        </i>
+                    </ion-item>
+                </ion-list>
+            </div>
+        </ion-header-bar>
+        <!--<ion-content class="has-header has-footer">-->
+        <ion-nav-view class="has-header"></ion-nav-view>
+        <!--</ion-content>-->
+        <ion-footer-bar>
+            <div class="tabs tabs-icon-top">
+                <a class="tab-item" ui-sref="wechat" ui-sref-active="balanced">
+                    <i class="icon ion-ios-chatbubble"></i>微信
+                </a>
+                <a class="tab-item" ui-sref="addressBook" ui-sref-active="balanced">
+                    <i class="icon ion-ios-personadd"></i>通讯录
+                </a>
+                <a class="tab-item" ui-sref="find" ui-sref-active="balanced">
+                    <i class="icon ion-android-compass"></i>发现
+                </a>
+            </div>
+        </ion-footer-bar>
+    </ion-side-menu-content>
+    <ion-side-menu side="left">
+        <ion-header-bar class="bar-dark">
+            <h1 class="title">我的信息</h1>
+        </ion-header-bar>
+        <ion-content class="has-header  side-menu-content">
+            <ion-list class="side-menu-margin-top  has-margin">
+                <ion-item class="item-thumbnail-left item-icon-right">
+                    <img src="img/1.jpg" alt="我的头像"/>
+
+                    <h2 class="my-name">Qoder</h2>
+
+                    <p class="">微信号:1234567890</p>
+                    <i class="icon ion-android-expand"></i>
+                </ion-item>
+            </ion-list>
+            <ion-list class=" has-margin">
+                <ion-item class="item-icon-left">
+                    <i class="icon ion-image positive"></i>
+                    <b>相册</b>
+                </ion-item>
+                <ion-item class="item-icon-left">
+                    <i class="icon ion-cube royal"></i>
+                    <b>收藏</b>
+                </ion-item>
+            </ion-list>
+            <ion-list class="has-margin">
+                <ion-item class="item-icon-left">
+                    <i class="icon ion-ios-briefcase positive"></i>
+                    <b>钱包</b>
+                </ion-item>
+                <ion-item class="item-icon-left">
+                    <i class="icon ion-folder positive"></i>
+                    <b>卡包</b>
+                </ion-item>
+            </ion-list>
+
+            <ion-list class=" has-margin">
+                <ion-item class="item-icon-left">
+                    <i class="icon ion-android-happy energized"></i>
+                    <b>表情</b>
+                </ion-item>
+            </ion-list>
+
+            <ion-list class=" has-margin">
+                <ion-item class="item-icon-left">
+                    <i class="icon ion-android-settings positive"></i>
+                    <b>设置</b>
+                </ion-item>
+            </ion-list>
+
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>
+<script src="app.js"></script>
+<script id="addFriend.html" type="text/ng-template">
+    <ion-header-bar class="bar-dark">
+        <div class="buttons">
+            <button class="button button-clear icon ion-android-arrow-back" ng-click="closeModal()"></button>
+        </div>
+        <h1 class="title title-left" ng-show="judge.addFriFocusShow">添加朋友</h1>
+        <label class="item-input-wrapper" style="background: transparent" ng-hide="judge.addFriFocusShow">
+            <i class="button button-clear icon ion-ios-search-strong placeholder-icon" ng-click="addFriend()"></i>
+            <input type="search" placeholder="搜索"
+                   style="background: transparent;height: 30px;border-bottom: 1px solid #4cd964;width: 90%;color: #ffffff"
+                   id="topInput"
+                   ng-model="user.friendName"
+                   ng-focus="addFriendIn()"
+                   ng-blur="addFriendOut()"
+                   maxlength="15">
+        </label>
+
+        <div class="list search-mess" ng-show="judge.searchMess" ng-click="search()">
+            <div class="item item-icon-left" style="height: 50px;">
+                <i class="icon ion-search balanced-bg light" style="width: 40px"></i>
+
+                <h2 ng-cloak="">搜索&nbsp;&nbsp;<span class="balanced">{{user.friendName}}</span></h2>
+            </div>
+        </div>
+    </ion-header-bar>
+    <ion-content class="has-header side-menu-content">
+        <ion-list class="has-margin" ng-show="judge.addFriFocusShow">
+            <ion-item class="item-icon-left">
+                <i class="icon balanced ion-ios-search-strong"></i>
+                <input type="text" ng-model="user.id" placeholder="微信号/QQ号/手机号"
+                       style="border-bottom: 1px solid #4cd964;width: 90%;color: #ffffff" ng-focus="addFriFocus()">
+            </ion-item>
+            <ion-item class="item-icon-right" style="background: #e8e8e8">
+                我的微信号:1234567890
+                <i class="icon ion-ios-musical-notes"></i>
+            </ion-item>
+        </ion-list>
+        <ion-list class="has-margin" ng-show="judge.addFriFocusShow">
+            <ion-item class="item-icon-left">
+                <i class="icon ion-social-rss light energized-bg " style="height:70%;margin-top:10px">&nbsp;</i>
+
+                <h2 class="padding-left">雷达加朋友</h2>
+
+
+                <p>雷达添加身边的朋友</p>
+            </ion-item>
+            <ion-item class="item-icon-left">
+                <i class="icon ion-person-stalker light balanced-bg " style="height:70%;margin-top:10px">&nbsp;</i>
+
+                <h2 class="padding-left">面对面建群</h2>
+
+                <p>与身边的朋友进入同一个群聊</p>
+            </ion-item>
+            <ion-item class="item-icon-left">
+                <i class="icon ion-android-expand light positive-bg" style="height:70%;margin-top:10px"
+                   style="height:70%;margin-top:10px">&nbsp;</i>
+
+                <h2 class="padding-left">扫一扫</h2>
+
+                <p>扫描二维码名片</p>
+            </ion-item>
+            <ion-item class="item-icon-left">
+                <i class="icon ion-person-add light energized-bg " style="height:70%;margin-top:10px">&nbsp;</i>
+
+                <h2 class="padding-left">QQ/手机联系人</h2>
+
+                <p>添加或邀请通讯录里面的朋友</p>
+            </ion-item>
+            <ion-item class="item-icon-left">
+                <i class="icon ion-ios-people light positive-bg " style="height:70%;margin-top:10px">&nbsp;</i>
+
+                <h2 class="padding-left">公众号</h2>
+
+                <p>获取更多资讯和服务</p>
+            </ion-item>
+
+        </ion-list>
+    </ion-content>
+</script>
+
+</body>
+</html>

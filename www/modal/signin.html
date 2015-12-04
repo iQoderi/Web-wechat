@@ -1,0 +1,26 @@
+<ion-header-bar class="bar-dark">
+    <h1 class="title title-left">微信</h1>
+</ion-header-bar>
+<ion-content class="has-header signinBackground" style="position: fixed">
+    <ion-list class="has-margin" ng-show="judge.addFriFocusShow">
+            <ion-item class="text-center item-borderless">
+                <img class="icon" src="./img/1.jpg" style="height: 100px;width: 100px">
+                <p style="color: #666" class="padding-top">Qoder</p>
+            </ion-item>
+            <ion-item class="item-icon-left item-borderless">
+                <i class="icon balanced ion-locked"></i>
+                <input type="password" placeholder="请输入密码"
+                       style="border-bottom: 1px solid #4cd964;color: #666;width: 95%"
+                       ng-model="user.password"
+                       ng-maxlength="16"
+                       maxlength="16">
+            </ion-item>
+            <ion-item class="item-borderless">
+                <button class="button button-block button-balanced light" ng-click="signIn()">登陆</button>
+                <div class="text-center padding-top" style="color: #4b8bf4">登陆遇见问题?</div>
+            </ion-item>
+    </ion-list>
+</ion-content>
+<ion-footer-bar>
+    <h1 class="title padding-bottom" style="color: #4b8bf4;border: none;font-size: 16px" ng-click="showTopMenu()">更多</h1>
+</ion-footer-bar>
