@@ -9,9 +9,9 @@
 ----
 ```javascript
 
-1.git clone https://github.com/iQoderi/Web-wechat.git
+1 .git clone https://github.com/iQoderi/Web-wechat.git
 
-2.npm install
+2. npm install
 
 ```
 
@@ -19,7 +19,7 @@
 
 ----
 ```javascript
-1.ionic serve
+1. ionic serve
 
 ```
 
